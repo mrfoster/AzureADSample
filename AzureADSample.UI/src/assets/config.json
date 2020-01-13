@@ -1,0 +1,6 @@
+{
+  "auth": {
+    "issuer": "https://login.microsoftonline.com/0a964219-2ea3-40ac-b076-acd9afff7d35/v2.0",
+    "clientId": "ce748a95-43d4-47c3-9fee-172dbbad3a5e"
+  }
+}

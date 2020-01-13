@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": "AzureADSample.Api"
+		},
+		{
+			"path": "AzureADSample.UI"
+		}
+	],
+	"settings": {
+		"typescript.tsdk": "AzureADSample.UI/node_modules/typescript/lib"
+	}
+}
