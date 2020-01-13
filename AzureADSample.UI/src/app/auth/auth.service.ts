@@ -44,7 +44,7 @@ export class AuthService {
 
     this.oAuthService.configure({
       issuer: this.config.auth.issuer,
-      redirectUri: `${origin}/index.html`,
+      redirectUri: `${origin}index.html`,
       silentRefreshRedirectUri: `${origin}silent-refresh.html`,
       clientId: this.config.auth.clientId,
       scope: 'openid profile email',
