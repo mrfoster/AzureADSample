@@ -1,0 +1,15 @@
+{
+  "IsEncrypted": false,
+  "Values": {
+    "AzureWebJobsStorage": "",
+    "FUNCTIONS_WORKER_RUNTIME": "dotnet",
+
+    "ApiBaseAddress": "https://localhost:5001/",
+
+    "AzureAD:Instance": "https://login.microsoftonline.com/{0}",
+    "AzureAD:Tenant": "0a964219-2ea3-40ac-b076-acd9afff7d35",
+    "AzureAD:ClientId": "6ccbea66-8d9f-4003-bd3b-1adfdd5c55eb",
+    "AzureAD:ClientSecret": "<SECRET>",
+    "AzureAD:Scopes": "api://4ca65853-af97-437b-a505-7ba91c26f68e/.default"
+  }
+}

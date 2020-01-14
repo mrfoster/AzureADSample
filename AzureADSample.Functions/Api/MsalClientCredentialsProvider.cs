@@ -14,11 +14,11 @@ namespace AzureADSample.Functions.Api
 
         public MsalClientCredentialsProvider(IConfiguration configuration)
         {
-            var clientId = configuration["AzureAd:ClientId"];
-            var clientSecret = configuration["AzureAd:ClientSecret"];
+            var clientId = configuration["AzureAD:ClientId"];
+            var clientSecret = configuration["AzureAD:ClientSecret"];
             var instance = configuration["AzureAd:Instance"];
-            var tenant = configuration["AzureAd:Tenant"];
-            var scopes = configuration["AzureAd:Scopes"];
+            var tenant = configuration["AzureAD:Tenant"];
+            var scopes = configuration["AzureAD:Scopes"];
 
             var authority = string.Format(CultureInfo.InvariantCulture, instance, tenant);
 
