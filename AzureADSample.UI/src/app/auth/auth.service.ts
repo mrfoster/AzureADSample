@@ -47,7 +47,7 @@ export class AuthService {
       redirectUri: `${origin}index.html`,
       silentRefreshRedirectUri: `${origin}silent-refresh.html`,
       clientId: this.config.auth.clientId,
-      scope: 'openid profile email',
+      scope: this.config.auth.scope,
       strictDiscoveryDocumentValidation: false
     });
     this.oAuthService.tokenValidationHandler = new JwksValidationHandler();

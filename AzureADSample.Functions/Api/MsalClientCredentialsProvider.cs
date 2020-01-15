@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Identity.Client;
@@ -14,21 +13,12 @@ namespace AzureADSample.Functions.Api
 
         public MsalClientCredentialsProvider(IConfiguration configuration)
         {
-            var clientId = configuration["AzureAd:ClientId"];
-            var clientSecret = configuration["AzureAd:ClientSecret"];
-            var instance = configuration["AzureAd:Instance"];
-            var tenant = configuration["AzureAd:Tenant"];
-            var scopes = configuration["AzureAd:Scopes"];
-
-            var authority = string.Format(CultureInfo.InvariantCulture, instance, tenant);
-
-            _app = ConfidentialClientApplicationBuilder
-                    .Create(clientId)
-                    .WithClientSecret(clientSecret)
-                    .WithAuthority(authority)
-                    .Build();
-
+            var scopes = configuration["Scopes"];
             _scopes = scopes.Split(new char[0], StringSplitOptions.RemoveEmptyEntries);
+
+            var options = new ConfidentialClientApplicationOptions();
+            configuration.Bind("AzureAd", options);
+            _app = ConfidentialClientApplicationBuilder.CreateWithApplicationOptions(options).Build();
         }
 
         public async Task<string> GetToken()

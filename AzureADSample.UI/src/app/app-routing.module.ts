@@ -10,9 +10,9 @@ const routes: Routes = [
     component: DashboardPageComponent
   },
   {
-    path: 'account',
+    path: 'user',
     loadChildren: () =>
-      import('./account/account.module').then(m => m.AccountModule)
+      import('./user/user.module').then(m => m.UserModule)
   },
   {
     path: '**',

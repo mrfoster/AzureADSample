@@ -1,0 +1,10 @@
+<button (click)="signOut()">Sign out</button>
+
+<h2>Claims</h2>
+<pre *ngIf="claims">{{ claims | json }}</pre>
+
+<h2>Scopes</h2>
+<pre *ngIf="scopes">{{ scopes | json }}</pre>
+
+<h2>User</h2>
+<pre *ngIf="user$ | async as user">{{ user | json }}</pre>

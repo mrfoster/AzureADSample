@@ -1,4 +1,5 @@
 using System.Security.Claims;
+using System.Linq;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,6 +10,7 @@ namespace AzureADSample.Api.Controllers
     public class UserController : ControllerBase
     {
         private readonly ClaimsPrincipal _currentUser;
+
         public UserController(ClaimsPrincipal currentUser)
         {
             _currentUser = currentUser;
@@ -18,7 +20,7 @@ namespace AzureADSample.Api.Controllers
         [AllowAnonymous]
         public IActionResult GetCurrentUser()
         {
-            return Ok(_currentUser);
+            return Ok(_currentUser.Claims.ToDictionary(c => c.Type, c => c.Value));
         }
 
     }

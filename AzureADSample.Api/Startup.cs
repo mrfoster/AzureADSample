@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -22,7 +23,7 @@ namespace AzureADSample.Api
         {
             services.AddHttpContextAccessor();
             services.AddTransient(x => x.GetService<IHttpContextAccessor>()?.HttpContext?.User);
-         
+
             services
                 .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options => Configuration.Bind("Auth", options));
@@ -33,8 +34,7 @@ namespace AzureADSample.Api
                     options.AddPolicy("CorsPolicy", builder => builder
                         .AllowAnyOrigin()
                         .AllowAnyMethod()
-                        .AllowAnyHeader()
-                        .AllowCredentials());
+                        .AllowAnyHeader());
                 });
 
             services.AddControllers();

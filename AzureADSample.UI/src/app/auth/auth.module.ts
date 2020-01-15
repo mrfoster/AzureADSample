@@ -7,7 +7,15 @@ import { AuthService } from './auth.service';
 
 @NgModule({
   declarations: [],
-  imports: [CommonModule, HttpClientModule, OAuthModule.forRoot()],
+  imports: [
+    CommonModule,
+    HttpClientModule,
+    OAuthModule.forRoot({
+      resourceServer: {
+        sendAccessToken: true
+      }
+    })
+  ],
   providers: [AuthService, AuthGuard],
   exports: [OAuthModule]
 })

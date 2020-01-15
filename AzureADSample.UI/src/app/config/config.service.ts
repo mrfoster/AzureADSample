@@ -17,7 +17,8 @@ export class ConfigService {
   load() {
     if (isPlatformServer(this.platformId)) {
       return of<Config>({
-        auth: { issuer: '', clientId: '' }
+        auth: { issuer: '', clientId: '', scope: '' },
+        baseApiUrl: ''
       });
     }
 

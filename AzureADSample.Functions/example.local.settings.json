@@ -5,11 +5,11 @@
     "FUNCTIONS_WORKER_RUNTIME": "dotnet",
 
     "ApiBaseAddress": "https://localhost:5001/",
+    "Scopes": "api://4ca65853-af97-437b-a505-7ba91c26f68e/.default",
 
-    "AzureAd:Instance": "https://login.microsoftonline.com/{0}",
-    "AzureAd:Tenant": "0a964219-2ea3-40ac-b076-acd9afff7d35",
+    "AzureAd:Instance": "https://login.microsoftonline.com/",
+    "AzureAd:TenantId": "0a964219-2ea3-40ac-b076-acd9afff7d35",
     "AzureAd:ClientId": "6ccbea66-8d9f-4003-bd3b-1adfdd5c55eb",
-    "AzureAd:ClientSecret": "<SECRET>",
-    "AzureAd:Scopes": "api://4ca65853-af97-437b-a505-7ba91c26f68e/.default"
+    "AzureAd:ClientSecret": "<SECRET>"
   }
 }

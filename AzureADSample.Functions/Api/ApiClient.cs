@@ -1,5 +1,4 @@
-﻿using System;
-using System.Net.Http;
+﻿using System.Net.Http;
 
 namespace AzureADSample.Functions.Api
 {
@@ -9,7 +8,7 @@ namespace AzureADSample.Functions.Api
 
         public ApiClient(HttpClient httpClient)
         {
-            HttpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
+            HttpClient = httpClient;
         }
     }
 }

@@ -3,10 +3,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Logging;
 using System.Net.Http;
 using AzureADSample.Functions.Api;
-using System;
+using Microsoft.Extensions.Logging;
+using System.Collections.Generic;
 
 namespace AzureAdSample.Functions
 {
@@ -23,15 +23,12 @@ namespace AzureAdSample.Functions
         public async Task<IActionResult> RunHttp(
              [HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)] HttpRequest req, ILogger log)
         {
-            log.LogInformation($"GetUser trigger function executing at {DateTime.UtcNow}");
-
-            using (var response = await _httpClient.GetAsync("api/user"))
+            IDictionary<string, string> claims;
+            using (var response = await _httpClient.GetAsync("user"))
             {
+                claims = await response.Content.ReadAsAsync<IDictionary<string, string>>();
             }
-
-            log.LogInformation($"GetUser Completed at {DateTime.UtcNow}");
-
-            return new OkResult();
+            return new JsonResult(claims);
         }
     }
 }
