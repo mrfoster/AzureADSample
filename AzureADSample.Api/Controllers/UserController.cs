@@ -23,7 +23,7 @@ namespace AzureADSample.Api.Controllers
         [AllowAnonymous]
         public IActionResult GetCurrentUser()
         {
-            return Ok(_currentUser.Claims.ToDictionary(c => c.Type, c => c.Value));
+            return Ok(_currentUser.Claims.GroupBy(c => c.Type, c => c.Value).ToDictionary(c => c.Key, c => c.ToArray()));
         }
 
         [HttpGet("config")]
