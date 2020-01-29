@@ -29,9 +29,10 @@ stages:
       inputs:
         command: publish
         arguments: '--configuration $(BuildConfiguration) --output $(build.artifactstagingdirectory)'
+        modifyOutputPath: false
         workingDirectory: AzureADSample.Api
 
-    - publish: $(build.artifactstagingdirectory)\AzureADSample.Api
+    - publish: $(build.artifactstagingdirectory)
       artifact: api
 
   - job: Website
