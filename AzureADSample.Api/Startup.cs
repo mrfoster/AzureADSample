@@ -1,4 +1,3 @@
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -13,17 +12,14 @@ namespace AzureADSample.Api
     public class Startup
     {
         public IConfiguration Configuration { get; }
-        private readonly ILogger<Startup> _logger;
 
-        public Startup(IConfiguration configuration, ILogger<Startup> logger)
+        public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
-            _logger = logger;
         }
 
-
         // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services)
+        public void ConfigureServices(IServiceCollection services, ILogger<Startup> logger)
         {
             services.AddHttpContextAccessor();
             services.AddTransient(x => x.GetService<IHttpContextAccessor>()?.HttpContext?.User);
@@ -35,14 +31,6 @@ namespace AzureADSample.Api
                     Configuration.Bind("Auth", options);
                     options.TokenValidationParameters.ValidateIssuer = false;
                     options.TokenValidationParameters.ValidateAudience = false;
-                    options.Events = new JwtBearerEvents()
-                    {
-                        OnAuthenticationFailed = context =>
-                        {
-                            _logger.LogError("OnAuthenticationFailed", context.Exception);
-                            return Task.CompletedTask;
-                        }
-                    };
                 });
 
             services
