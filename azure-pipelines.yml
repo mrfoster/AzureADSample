@@ -30,8 +30,8 @@ stages:
         command: publish
         arguments: '--configuration $(BuildConfiguration) --output $(build.artifactstagingdirectory)'
         workingDirectory: AzureADSample.Api
-      
-    - publish: $(build.artifactstagingdirectory)/AzureADSample.Api
+
+    - publish: $(build.artifactstagingdirectory)\AzureADSample.Api
       artifact: api
 
   - job: Website
@@ -44,8 +44,8 @@ stages:
         versionSpec: 10.x
 
     - script: npm install -g @angular/cli && npm install && npm run build
-      workingDirectory: AzureADSample.Website
+      workingDirectory: AzureADSample.UI
       displayName: 'website: npm install and build'
 
-    - publish: AzureADSample.Website/dist
+    - publish: AzureADSample.UI/dist
       artifact: website
