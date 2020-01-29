@@ -22,7 +22,7 @@ steps:
       appType: webAppLinux
       WebAppName: $(ApiAppName)
       packageForLinux: $(Pipeline.Workspace)/api/api.zip
-      AppSettings: |
+      AppSettings: >-
         -Auth__Audience "$(ApiClientId)"
 
   - task: AzureFunctionApp@1
@@ -32,7 +32,7 @@ steps:
       appType: functionAppLinux
       package: $(Pipeline.Workspace)/functions/functions.zip
       appName: $(FunctionsAppName)
-      AppSettings: |
+      AppSettings: >-
         -BaseApiUrl "$(baseApiUrl)"
         -Scopes "api://$(ApiClientId)/.default"
         -AzureAd__Instance "https://login.microsoftonline.com/"
