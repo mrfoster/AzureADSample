@@ -9,18 +9,9 @@ import { DashboardPageComponent } from './dashboard/dashboard-page.component';
 import { NotFoundPageComponent } from './not-found-page/not-found-page.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    DashboardPageComponent,
-    NotFoundPageComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    ConfigModule,
-    AuthModule
-  ],
+  declarations: [AppComponent, DashboardPageComponent, NotFoundPageComponent],
+  imports: [BrowserModule, ConfigModule, AppRoutingModule, AuthModule],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}
