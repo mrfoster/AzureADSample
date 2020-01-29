@@ -12,11 +12,11 @@ stages:
 - stage: build
   jobs:
   - job: API
+    displayName: Build API
+  
     variables:
       buildConfiguration: Release
     
-    displayName: Build API
-
     steps:
     - task: UseDotNet@2
       displayName: Use .Net Core sdk
@@ -58,6 +58,9 @@ stages:
 
   - job: Functions
     displayName: Build Functions
+
+    variables:
+      buildConfiguration: Release
 
     steps:
     - task: UseDotNet@2
