@@ -1,0 +1,29 @@
+variables:
+  auth.clientId: $(WebsiteClientId)
+  auth.scope: openid profile email api://$(ApiClientId)/.default
+  baseApiUrl: $(ApiUrl)
+
+steps:
+  - task: FileTransform@1
+    displayName: Configure Website
+    inputs:
+      folderPath: $(Pipeline.Workspace)/website/
+      fileType: json
+      targetFiles: config.json
+
+  - task: AzureFileCopy@2
+    displayName: Deploy Website
+    inputs:
+      SourcePath: $(Pipeline.Workspace)/website
+      azureSubscription: $(AzureSubscription)
+      Destination: AzureBlob
+      storage: $(WebsiteStorage)
+      ContainerName: "$web"
+
+  - task: AzureRmWebAppDeployment@4
+    displayName: Deploy API
+    inputs:
+      azureSubscription: $(AzureSubscription)
+      appType: webAppLinux
+      WebAppName: $(ApiAppName)
+      RuntimeStack: "DOTNETCORE|LTS"

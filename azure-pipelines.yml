@@ -3,6 +3,9 @@ trigger:
   
 pool: Default
 
+variables:
+  AzureSubscription: 'Visual Studio Enterprise – MPN (e3a1efb9-d0ea-49ea-b6c2-6430cb1ab7cb)'
+
 stages:
 - stage: build
   jobs:
@@ -30,6 +33,7 @@ stages:
         command: publish
         arguments: '--configuration $(BuildConfiguration) --output $(build.artifactstagingdirectory)'
         modifyOutputPath: false
+        zipAfterPublish: false
         workingDirectory: AzureADSample.Api
 
     - publish: $(build.artifactstagingdirectory)
@@ -48,5 +52,25 @@ stages:
       workingDirectory: AzureADSample.UI
       displayName: 'website: npm install and build'
 
-    - publish: AzureADSample.UI/dist
+    - publish: AzureADSample.UI/dist/browser
       artifact: website
+
+
+- stage: qa
+  jobs:
+  - deployment: qa
+    variables:
+
+      WebsiteClientId: a36db5a2-1bd7-4b40-9e05-33bce3ff7f0a
+      ApiClientId: 4ca65853-af97-437b-a505-7ba91c26f68e
+      ApiUrl: https://multitenantazuread-api.azurewebsites.net/
+
+      ApiAppName: multitenantazuread-api
+      WebsiteStorage: multitenantazuread
+
+    environment: qa
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+            - template: azure-deployment-steps.yml
