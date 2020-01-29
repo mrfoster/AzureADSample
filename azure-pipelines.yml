@@ -27,7 +27,7 @@ stages:
       displayName: dotnet build
       inputs:
         projects: AzureADSample.Api
-        arguments: -c $(buildConfiguration) -p:AssemblyVersion=$(Build.BuildNumber)
+        arguments: -c $(buildConfiguration) -p:Version=$(Build.BuildNumber)
           
     - task: DotNetCoreCLI@2
       displayName: dotnet publish
