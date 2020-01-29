@@ -23,3 +23,5 @@ steps:
       WebAppName: $(ApiAppName)
       RuntimeStack: DOTNETCORE|LTS
       packageForLinux: $(Pipeline.Workspace)/**/*.zip
+      AppSettings: |
+        -Auth:Audience "$(ApiClientId)"

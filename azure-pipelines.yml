@@ -59,7 +59,6 @@ stages:
   jobs:
   - deployment: qa
     variables:
-
       WebsiteClientId: a36db5a2-1bd7-4b40-9e05-33bce3ff7f0a
       ApiClientId: 2a90d9f4-053f-4c76-ad3c-099cb0f35595
       ApiUrl: https://multitenantazuread-api.azurewebsites.net/
