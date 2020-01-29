@@ -68,6 +68,11 @@ stages:
       ApiAppName: multitenantazuread-api
       WebsiteStorage: multitenantazuread
 
+      # Website config.json
+      auth.clientId: $(WebsiteClientId)
+      auth.scope: openid profile email api://$(ApiClientId)/.default
+      baseApiUrl: $(ApiUrl)
+      
     environment: qa
     strategy:
       runOnce:
