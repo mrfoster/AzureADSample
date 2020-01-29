@@ -4,7 +4,7 @@ trigger:
 pool: Default
 
 variables:
-  AzureSubscription: 'Visual Studio Enterprise – MPN (e3a1efb9-d0ea-49ea-b6c2-6430cb1ab7cb)'
+  AzureSubscription: Azure Chris MPN - AzureAdSample
 
 stages:
 - stage: build
@@ -50,7 +50,7 @@ stages:
 
     - script: npm install -g @angular/cli && npm install && npm run build
       workingDirectory: AzureADSample.UI
-      displayName: 'website: npm install and build'
+      displayName: npm install and build
 
     - publish: AzureADSample.UI/dist/browser
       artifact: website
