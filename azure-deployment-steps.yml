@@ -21,7 +21,7 @@ steps:
       azureSubscription: $(AzureSubscription)
       appType: webAppLinux
       WebAppName: $(ApiAppName)
-      packageForLinux: $(Pipeline.Workspace)/**/*.zip
+      packageForLinux: $(Pipeline.Workspace)/api/*.zip
       AppSettings: |
         -Auth__Audience "$(ApiClientId)"
 
@@ -30,4 +30,5 @@ steps:
     inputs:
       azureSubscription: $(AzureSubscription)
       appType: functionAppLinux
+      package: $(Pipeline.Workspace)/functions/*.zip
       appName: $(FunctionsAppName)
