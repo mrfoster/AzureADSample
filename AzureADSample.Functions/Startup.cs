@@ -29,7 +29,7 @@ namespace AzureADSample.Functions
             builder.Services.AddHttpClient<ApiClient>(client =>
             {
                 client.DefaultRequestHeaders.Add("Accept", "application/json");
-                client.BaseAddress = new Uri(config["ApiBaseAddress"]);
+                client.BaseAddress = new Uri(config["BaseApiUrl"]);
             }).AddHttpMessageHandler<ApiHandler>();
         }
     }

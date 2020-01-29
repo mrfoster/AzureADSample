@@ -21,7 +21,7 @@ steps:
       azureSubscription: $(AzureSubscription)
       appType: webAppLinux
       WebAppName: $(ApiAppName)
-      packageForLinux: $(Pipeline.Workspace)/api/*.zip
+      packageForLinux: $(Pipeline.Workspace)/api/api.zip
       AppSettings: |
         -Auth__Audience "$(ApiClientId)"
 
@@ -30,5 +30,12 @@ steps:
     inputs:
       azureSubscription: $(AzureSubscription)
       appType: functionAppLinux
-      package: $(Pipeline.Workspace)/functions/*.zip
+      package: $(Pipeline.Workspace)/functions/functions.zip
       appName: $(FunctionsAppName)
+      AppSettings: |
+        -BaseApiUrl "$(baseApiUrl)"
+        -Scopes "api://$(ApiClientId)/.default"
+        -AzureAd__Instance "https://login.microsoftonline.com/"
+        -AzureAd__TenantId "$(TenantId)"
+        -AzureAd__ClientId "$(FunctionsClientId)"
+        -AzureAd__ClientSecret "$(FunctionsClientSecret)"

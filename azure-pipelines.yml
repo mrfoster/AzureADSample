@@ -97,6 +97,10 @@ stages:
       FunctionsAppName: multitenantazuread-functions
       WebsiteStorage: multitenantazuread
 
+      TenantId: b60cd469-51bd-4b39-a9f7-3140752ed3d9
+      FunctionsClientId: 0e841e38-82fd-4cc3-9a9e-1758d4d5d796
+      #FunctionsClientSecret:
+
       # Website config.json
       auth.clientId: $(WebsiteClientId)
       auth.scope: openid profile email api://$(ApiClientId)/.default
