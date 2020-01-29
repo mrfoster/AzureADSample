@@ -54,7 +54,6 @@ stages:
     - publish: AzureADSample.UI/dist/browser
       artifact: website
 
-
 - stage: qa
   jobs:
   - deployment: qa
