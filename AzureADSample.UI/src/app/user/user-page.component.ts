@@ -13,8 +13,8 @@ export class UserPageComponent implements OnInit {
   user$: Observable<any>;
 
   constructor(
-    private oauthService: OAuthService,
-    private userService: UserService
+    private readonly oauthService: OAuthService,
+    private readonly userService: UserService
   ) {}
 
   ngOnInit() {

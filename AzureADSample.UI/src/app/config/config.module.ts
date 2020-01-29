@@ -1,6 +1,9 @@
 import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { Config } from './config';
 import { ConfigService } from './config.service';
+import { ConfigPageComponent } from './config-page.component';
+import { ConfigRoutingModule } from './config-routing.module';
+import { CommonModule } from '@angular/common';
 
 let config: Config;
 
@@ -15,10 +18,10 @@ export function initConfig(configService: ConfigService) {
 }
 
 @NgModule({
-  imports: [],
+  imports: [CommonModule, ConfigRoutingModule],
 
   exports: [],
-  declarations: [],
+  declarations: [ConfigPageComponent],
   providers: [
     {
       provide: APP_INITIALIZER,
