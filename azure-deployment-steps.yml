@@ -24,4 +24,4 @@ steps:
       RuntimeStack: DOTNETCORE|LTS
       packageForLinux: $(Pipeline.Workspace)/**/*.zip
       AppSettings: |
-        -Auth:Audience "$(ApiClientId)"
+        -Auth__Audience "$(ApiClientId)"
