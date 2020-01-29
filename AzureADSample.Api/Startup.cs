@@ -19,7 +19,7 @@ namespace AzureADSample.Api
         }
 
         // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services, ILogger<Startup> logger)
+        public void ConfigureServices(IServiceCollection services)
         {
             services.AddHttpContextAccessor();
             services.AddTransient(x => x.GetService<IHttpContextAccessor>()?.HttpContext?.User);
