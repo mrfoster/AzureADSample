@@ -1,0 +1,5 @@
+<h2>Config</h2>
+<pre>{{ config | json }}</pre>
+
+<h2>API Config</h2>
+<pre *ngIf="apiConfig$ | async as apiConfig">{{ apiConfig | json }}</pre>

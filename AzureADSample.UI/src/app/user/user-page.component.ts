@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { OAuthService } from 'angular-oauth2-oidc';
 import { UserService } from './user.service';
 import { Observable } from 'rxjs';
-import { Config } from '../config/config';
 
 @Component({
   selector: 'app-user-page',
@@ -15,8 +14,7 @@ export class UserPageComponent implements OnInit {
 
   constructor(
     private readonly oauthService: OAuthService,
-    private readonly userService: UserService,
-    readonly config: Config
+    private readonly userService: UserService
   ) {}
 
   ngOnInit() {

@@ -21,18 +21,10 @@ namespace AzureADSample.Api.Controllers
             var assembly = typeof(Program).GetTypeInfo().Assembly;
             return new
             {
-                Version = assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>()?.InformationalVersion
-            };
-        }
-
-        [HttpGet("config")]
-        public IActionResult GetConfig()
-        {
-            return Ok(new
-            {
+                Version = assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>()?.InformationalVersion,
                 Authority = _configuration.GetValue<string>("Auth:Authority"),
                 Audience = _configuration.GetValue<string>("Auth:Audience")
-            });
+            };
         }
     }
 }
