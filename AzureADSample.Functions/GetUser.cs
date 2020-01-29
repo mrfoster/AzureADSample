@@ -23,10 +23,10 @@ namespace AzureAdSample.Functions
         public async Task<IActionResult> RunHttp(
              [HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)] HttpRequest req, ILogger log)
         {
-            IDictionary<string, string> claims;
+            IDictionary<string, string[]> claims;
             using (var response = await _httpClient.GetAsync("user"))
             {
-                claims = await response.Content.ReadAsAsync<IDictionary<string, string>>();
+                claims = await response.Content.ReadAsAsync<IDictionary<string, string[]>>();
             }
             return new JsonResult(claims);
         }
