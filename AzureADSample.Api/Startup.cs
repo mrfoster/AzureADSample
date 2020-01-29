@@ -30,7 +30,6 @@ namespace AzureADSample.Api
                 {
                     Configuration.Bind("Auth", options);
                     options.TokenValidationParameters.ValidateIssuer = false;
-                    options.TokenValidationParameters.ValidateAudience = false;
                 });
 
             services
