@@ -24,3 +24,10 @@ steps:
       packageForLinux: $(Pipeline.Workspace)/**/*.zip
       AppSettings: |
         -Auth__Audience "$(ApiClientId)"
+
+  - task: AzureFunctionApp@1
+    displayName: Deploy Functions
+    inputs:
+      azureSubscription: $(AzureSubscription)
+      appType: functionAppLinux
+      appName: $(FunctionsAppName)

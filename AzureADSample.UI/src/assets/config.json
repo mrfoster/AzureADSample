@@ -1,4 +1,5 @@
 {
+  "version": "1.0.0",
   "auth": {
     "issuer": "https://login.microsoftonline.com/organizations/v2.0",
     "clientId": "622e2e2c-75bf-492d-868a-d8a71cd2ffa1",
