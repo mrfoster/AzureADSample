@@ -13,7 +13,7 @@ steps:
       azureSubscription: $(AzureSubscription)
       Destination: AzureBlob
       storage: $(WebsiteStorage)
-      ContainerName: "$web"
+      ContainerName: $web
 
   - task: AzureRmWebAppDeployment@4
     displayName: Deploy API
@@ -21,4 +21,5 @@ steps:
       azureSubscription: $(AzureSubscription)
       appType: webAppLinux
       WebAppName: $(ApiAppName)
-      RuntimeStack: "DOTNETCORE|LTS"
+      RuntimeStack: DOTNETCORE|LTS
+      packageForLinux: $(Pipeline.Workspace)/**/*.zip
