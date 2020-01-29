@@ -26,7 +26,11 @@ namespace AzureADSample.Api
 
             services
                 .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-                .AddJwtBearer(options => Configuration.Bind("Auth", options));
+                .AddJwtBearer(options =>
+                {
+                    Configuration.Bind("Auth", options);
+                    options.TokenValidationParameters.ValidateIssuer = false;
+                });
 
             services
                 .AddCors(options =>

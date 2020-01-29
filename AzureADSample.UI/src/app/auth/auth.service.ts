@@ -44,6 +44,7 @@ export class AuthService {
 
     this.oAuthService.configure({
       issuer: this.config.auth.issuer,
+      skipIssuerCheck: true,
       redirectUri: `${origin}index.html`,
       silentRefreshRedirectUri: `${origin}silent-refresh.html`,
       clientId: this.config.auth.clientId,
