@@ -3,6 +3,9 @@ trigger:
   
 pool: Default
 
+variables:
+  AzureSubscription: Azure Chris MPN - AzureAdSample
+
 stages:
 - stage: build
   jobs:
@@ -29,9 +32,10 @@ stages:
       inputs:
         command: publish
         arguments: '--configuration $(BuildConfiguration) --output $(build.artifactstagingdirectory)'
+        modifyOutputPath: false
         workingDirectory: AzureADSample.Api
-      
-    - publish: $(build.artifactstagingdirectory)/AzureADSample.Api
+
+    - publish: $(build.artifactstagingdirectory)
       artifact: api
 
   - job: Website
@@ -44,8 +48,31 @@ stages:
         versionSpec: 10.x
 
     - script: npm install -g @angular/cli && npm install && npm run build
-      workingDirectory: AzureADSample.Website
-      displayName: 'website: npm install and build'
+      workingDirectory: AzureADSample.UI
+      displayName: npm install and build
 
-    - publish: AzureADSample.Website/dist
+    - publish: AzureADSample.UI/dist/browser
       artifact: website
+
+- stage: qa
+  jobs:
+  - deployment: qa
+    variables:
+      WebsiteClientId: a36db5a2-1bd7-4b40-9e05-33bce3ff7f0a
+      ApiClientId: 2a90d9f4-053f-4c76-ad3c-099cb0f35595
+      ApiUrl: https://multitenantazuread-api.azurewebsites.net/
+
+      ApiAppName: multitenantazuread-api
+      WebsiteStorage: multitenantazuread
+
+      # Website config.json
+      auth.clientId: $(WebsiteClientId)
+      auth.scope: openid profile email api://$(ApiClientId)/.default
+      baseApiUrl: $(ApiUrl)
+      
+    environment: qa
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+            - template: azure-deployment-steps.yml
