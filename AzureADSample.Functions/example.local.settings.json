@@ -3,7 +3,7 @@
   "Values": {
     "AzureWebJobsStorage": "",
     "FUNCTIONS_WORKER_RUNTIME": "dotnet",
-    "ApiBaseAddress": "https://localhost:5001/",
+    "BaseApiUrl": "https://localhost:5001/",
     "Scopes": "api://4ca65853-af97-437b-a505-7ba91c26f68e/.default",
     "AzureAd__Instance": "https://login.microsoftonline.com/",
     "AzureAd__TenantId": "0a964219-2ea3-40ac-b076-acd9afff7d35",
