@@ -7,6 +7,7 @@ pool: Default
 
 variables:
   AzureSubscription: Azure Chris MPN - AzureAdSample
+  buildConfiguration: Release
 
 stages:
 - stage: build
@@ -14,9 +15,6 @@ stages:
   - job: API
     displayName: Build API
   
-    variables:
-      buildConfiguration: Release
-    
     steps:
     - task: UseDotNet@2
       displayName: Use .Net Core sdk
@@ -52,9 +50,6 @@ stages:
 
   - job: Functions
     displayName: Build Functions
-
-    variables:
-      buildConfiguration: Release
 
     steps:
     - task: UseDotNet@2
