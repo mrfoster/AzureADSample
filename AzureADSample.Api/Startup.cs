@@ -1,3 +1,4 @@
+using System.Linq;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -5,7 +6,6 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 
 namespace AzureADSample.Api
 {
@@ -29,9 +29,19 @@ namespace AzureADSample.Api
                 .AddJwtBearer(options =>
                 {
                     Configuration.Bind("Auth", options);
-                    options.TokenValidationParameters.ValidateIssuer = false;
-                });
 
+                    var tenants = Configuration.GetValue("Auth:ValidTenants", new string[] { });
+
+                    if (tenants.Length == 0)
+                    {
+                        options.TokenValidationParameters.ValidateIssuer = false;
+                    }
+                    else
+                    {
+                        options.TokenValidationParameters.ValidIssuers = tenants.Select(tenant => $"https://login.microsoftonline.com/{tenant}/v2.0");
+                    }
+                });
+                
             services
                 .AddCors(options =>
                 {

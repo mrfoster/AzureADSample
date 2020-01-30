@@ -39,15 +39,15 @@ export class AuthService {
       return;
     }
     const origin = `${
-      document.location.origin
+      window.location.origin
     }${this.locationStrategy.getBaseHref()}`;
 
     this.oAuthService.configure({
       issuer: this.config.auth.issuer,
-      redirectUri: `${origin}index.html`,
-      silentRefreshRedirectUri: `${origin}silent-refresh.html`,
       clientId: this.config.auth.clientId,
       scope: this.config.auth.scope,
+      redirectUri: `${origin}index.html`,
+      silentRefreshRedirectUri: `${origin}silent-refresh.html`,
       strictDiscoveryDocumentValidation: false,
       skipIssuerCheck: true
     });
