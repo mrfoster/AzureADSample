@@ -18,10 +18,10 @@ namespace AzureADSample.Api.Controllers
         [HttpGet]
         public dynamic Get()
         {
-            var assembly = typeof(Program).GetTypeInfo().Assembly;
+            var assembly = Assembly.GetEntryAssembly();
             return new
             {
-                Version = assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>()?.InformationalVersion,
+                Version = assembly?.GetCustomAttribute<AssemblyInformationalVersionAttribute>()?.InformationalVersion,
                 Authority = _configuration.GetValue<string>("Auth:Authority"),
                 Audience = _configuration.GetValue<string>("Auth:Audience")
             };
