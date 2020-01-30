@@ -22,18 +22,12 @@ stages:
       displayName: Use .Net Core sdk
       inputs:
         useGlobalJson: true
-
-    - task: DotNetCoreCLI@2
-      displayName: dotnet build
-      inputs:
-        projects: AzureADSample.Api
-        arguments: -c $(buildConfiguration) -p:Version=$(Build.BuildNumber)
           
     - task: DotNetCoreCLI@2
       displayName: dotnet publish
       inputs:
         command: publish
-        arguments: --configuration $(BuildConfiguration) --output $(build.artifactstagingdirectory)/api
+        arguments: --configuration $(BuildConfiguration) -p:Version=$(Build.BuildNumber) --output $(build.artifactstagingdirectory)/api
         modifyOutputPath: false
         workingDirectory: AzureADSample.Api
 
@@ -67,18 +61,12 @@ stages:
       displayName: Use .Net Core sdk
       inputs:
         useGlobalJson: true
-
-    - task: DotNetCoreCLI@2
-      displayName: dotnet build
-      inputs:
-        projects: AzureADSample.Functions
-        arguments: -c $(buildConfiguration) -p:AssemblyVersion=$(Build.BuildNumber)
           
     - task: DotNetCoreCLI@2
       displayName: dotnet publish
       inputs:
         command: publish
-        arguments: --configuration $(BuildConfiguration) --output $(build.artifactstagingdirectory)/functions
+        arguments: --configuration $(BuildConfiguration) -p:Version=$(Build.BuildNumber) --output $(build.artifactstagingdirectory)/functions
         modifyOutputPath: false
         workingDirectory: AzureADSample.Functions
 
