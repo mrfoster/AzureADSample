@@ -3,6 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AzureADSample.Api", "AzureADSample.Api\AzureADSample.Api.csproj", "{61BE2828-62D4-451C-8171-15D6432A4869}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AzureADSample.Functions", "AzureADSample.Functions\AzureADSample.Functions.csproj", "{92C532D4-6E7C-495C-A35F-0DFC3A14EEA0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{E36B6AD7-E140-47B4-BAFE-1FE72E6D702E}"
+	ProjectSection(SolutionItems) = preProject
+		azure-deployment-steps.yml = azure-deployment-steps.yml
+		azure-pipelines.yml = azure-pipelines.yml
+		global.json = global.json
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,5 +22,9 @@ Global
 		{61BE2828-62D4-451C-8171-15D6432A4869}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{61BE2828-62D4-451C-8171-15D6432A4869}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{61BE2828-62D4-451C-8171-15D6432A4869}.Release|Any CPU.Build.0 = Release|Any CPU
+		{92C532D4-6E7C-495C-A35F-0DFC3A14EEA0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{92C532D4-6E7C-495C-A35F-0DFC3A14EEA0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{92C532D4-6E7C-495C-A35F-0DFC3A14EEA0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{92C532D4-6E7C-495C-A35F-0DFC3A14EEA0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

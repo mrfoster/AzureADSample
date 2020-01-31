@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System.Collections.Generic;
 
 namespace AzureADSample.Api
 {
@@ -29,16 +30,15 @@ namespace AzureADSample.Api
                 .AddJwtBearer(options =>
                 {
                     Configuration.Bind("Auth", options);
-
-                    var tenants = Configuration.GetValue("Auth:ValidTenants", new string[] { });
-
-                    if (tenants.Length == 0)
+                    
+                    var tenants = Configuration.GetSection("Auth:ValidTenants").Get<string[]>();
+                    if (tenants != null && tenants.Any())
                     {
-                        options.TokenValidationParameters.ValidateIssuer = false;
+                        options.TokenValidationParameters.ValidIssuers = tenants.Select(tenant => $"https://login.microsoftonline.com/{tenant}/v2.0");
                     }
                     else
                     {
-                        options.TokenValidationParameters.ValidIssuers = tenants.Select(tenant => $"https://login.microsoftonline.com/{tenant}/v2.0");
+                        options.TokenValidationParameters.ValidateIssuer = false;
                     }
                 });
                 
