@@ -9,9 +9,6 @@
     {
       "name": "AzureADSample.Functions",
       "path": "AzureADSample.Functions"
-    },
-    {
-      "path": "."
     }
   ],
   "settings": {
