@@ -44,8 +44,7 @@ export class AuthService {
       redirectUri: `${origin}index.html`,
       silentRefreshRedirectUri: `${origin}silent-refresh.html`,
       strictDiscoveryDocumentValidation: false,
-      skipIssuerCheck: true,
-      sessionChecksEnabled: true
+      skipIssuerCheck: true
     });
     this.oAuthService.tokenValidationHandler = new JwksValidationHandler();
 
