@@ -1,10 +1,18 @@
-<button (click)="signOut()">Sign out</button>
+<ng-container *ngIf="model$ | async as model">
+  <ng-container *ngIf="model.user">
+    <button (click)="refreshToken()">Refresh token</button>
 
-<h2>Claims</h2>
-<pre *ngIf="claims">{{ claims | json }}</pre>
+    <h1>{{ model.claims.name }} ({{ model.claims.preferred_username }})</h1>
+    <p>Expires: {{ model.claims.exp * 1000 | date: 'full' }}</p>
 
-<h2>Scopes</h2>
-<pre *ngIf="scopes">{{ scopes | json }}</pre>
+    <h2>Claims</h2>
+    <pre>{{ model.claims | json }}</pre>
 
-<h2>User</h2>
-<pre *ngIf="user$ | async as user">{{ user | json }}</pre>
+    <h2>Scopes</h2>
+    <pre>{{ model.scopes | json }}</pre>
+
+    <h2>User</h2>
+    <pre>{{ model.user | json }}</pre>
+  </ng-container>
+  <ng-container *ngIf="!model.user">Not logged in</ng-container>
+</ng-container>

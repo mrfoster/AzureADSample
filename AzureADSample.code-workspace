@@ -16,7 +16,10 @@
     "liveServer.settings.multiRootWorkspaceName": "AzureADSample.Functions",
     "typescript.preferences.quoteStyle": "single",
     "prettier.singleQuote": true,
-    "editor.formatOnSave": true
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": true
+    }
   },
   "tasks": {
     "tasks": [

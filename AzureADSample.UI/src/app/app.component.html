@@ -1,7 +1,5 @@
-<nav>
-  <a [routerLink]="['/']">Home</a>
-  <a [routerLink]="['/user']">User</a>
-  <a [routerLink]="['/config']">Config</a>
-</nav>
+<app-toolbar></app-toolbar>
 
-<router-outlet></router-outlet>
+<div class="wrapper--page">
+  <router-outlet></router-outlet>
+</div>
