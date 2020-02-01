@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { BrowserModule } from '@angular/platform-browser';
@@ -11,6 +12,7 @@ import { ConfigModule } from './config/config.module';
 import { DashboardPageComponent } from './dashboard/dashboard-page.component';
 import { NotFoundPageComponent } from './not-found-page/not-found-page.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,7 +28,8 @@ import { ToolbarComponent } from './toolbar/toolbar.component';
     AuthModule,
     MatToolbarModule,
     MatButtonModule,
-    MatMenuModule
+    MatMenuModule,
+    MatIconModule
   ],
   providers: [],
   bootstrap: [AppComponent]

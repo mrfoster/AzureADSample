@@ -7,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace AzureADSample.Api
 {
@@ -30,7 +31,7 @@ namespace AzureADSample.Api
                 .AddJwtBearer(options =>
                 {
                     Configuration.Bind("Auth", options);
-                    
+
                     var tenants = Configuration.GetSection("Auth:ValidTenants").Get<string[]>();
                     if (tenants != null && tenants.Any())
                     {
@@ -40,8 +41,17 @@ namespace AzureADSample.Api
                     {
                         options.TokenValidationParameters.ValidateIssuer = false;
                     }
+
+                    options.Events = new JwtBearerEvents()
+                    {
+                        OnAuthenticationFailed = (e) =>
+                        {
+                            var x = 1;
+                            return Task.CompletedTask;
+                        }
+                    };
                 });
-                
+
             services
                 .AddCors(options =>
                 {

@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { Config } from './config';
 import { HttpClient } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Config } from './config';
 
 @Component({
   selector: 'app-config.page',

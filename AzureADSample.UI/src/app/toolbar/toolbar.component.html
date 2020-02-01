@@ -1,36 +1,29 @@
 <mat-toolbar color="primary">
-  <div class="wrapper">
-    <a class="logo" routerLink="/">
-      <img src="logo.svg" width="35" height="35" alt="" />
-    </a>
+  <a mat-icon-button routerLink="/"><mat-icon svgIcon="logo"></mat-icon></a>
+  <a mat-button routerLink="/user"><mat-icon>person</mat-icon> User</a>
+  <a mat-button routerLink="/config"><mat-icon>settings</mat-icon> Settings</a>
 
-    <a mat-button routerLink="/user">User</a>
-    <a mat-button routerLink="/config">Config</a>
+  <div class="toolbar_actions">
+    <a
+      *ngIf="!(authService.authenticated | async)"
+      mat-raised-button
+      color="white"
+      (click)="authService.logIn()"
+    >
+      <mat-icon>exit_to_app</mat-icon> Log In</a
+    >
 
-    <!-- <button mat-button (click)="logOut()">Logout</button>
-    <div class="toolbar_actions">
-      <a mat-raised-button color="white" [href]="siteUrl">View Site</a>
-    </div> -->
-
-    <div class="toolbar_actions">
-      <a
-        *ngIf="!(authService.authenticated | async)"
-        mat-raised-button
-        color="white"
-        (click)="authService.logIn()"
-        >Log In</a
-      >
-
-      <button
-        *ngIf="authService.authenticated | async"
-        mat-button
-        [matMenuTriggerFor]="menu"
-      >
-        {{ userNameChanged | async }}
+    <button
+      *ngIf="authService.authenticated | async"
+      mat-button
+      [matMenuTriggerFor]="menu"
+    >
+      <mat-icon>account_circle</mat-icon> {{ userNameChanged | async }}
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item (click)="authService.logOut()">
+        <mat-icon>logout</mat-icon> Log Out
       </button>
-      <mat-menu #menu="matMenu">
-        <button mat-menu-item (click)="authService.logOut()">Log Out</button>
-      </mat-menu>
-    </div>
+    </mat-menu>
   </div>
 </mat-toolbar>

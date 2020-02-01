@@ -86,7 +86,7 @@ stages:
 
       # Website config.json
       auth.clientId: $(WebsiteClientId)
-      auth.scope: openid profile email api://$(ApiClientId)/.default
+      auth.apiScope: api://$(ApiClientId)/access_as_user
       baseApiUrl: $(ApiUrl)
       version: $(Build.BuildNumber)
       

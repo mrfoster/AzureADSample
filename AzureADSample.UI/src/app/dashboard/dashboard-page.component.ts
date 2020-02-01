@@ -4,9 +4,8 @@ import { Component, OnInit } from '@angular/core';
   selector: 'app-dashboard-page',
   templateUrl: 'dashboard-page.component.html'
 })
-
 export class DashboardPageComponent implements OnInit {
-  constructor() { }
+  constructor() {}
 
-  ngOnInit() { }
+  ngOnInit() {}
 }

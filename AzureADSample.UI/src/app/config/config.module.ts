@@ -1,9 +1,9 @@
+import { CommonModule } from '@angular/common';
 import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { Config } from './config';
-import { ConfigService } from './config.service';
 import { ConfigPageComponent } from './config-page.component';
 import { ConfigRoutingModule } from './config-routing.module';
-import { CommonModule } from '@angular/common';
+import { ConfigService } from './config.service';
 
 let config: Config;
 

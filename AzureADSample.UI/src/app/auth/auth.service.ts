@@ -40,7 +40,7 @@ export class AuthService {
     this.oAuthService.configure({
       issuer: this.config.auth.issuer,
       clientId: this.config.auth.clientId,
-      scope: this.config.auth.scope,
+      scope: `openid profile email ${this.config.auth.apiScope}`,
       redirectUri: `${origin}index.html`,
       silentRefreshRedirectUri: `${origin}silent-refresh.html`,
       strictDiscoveryDocumentValidation: false,
