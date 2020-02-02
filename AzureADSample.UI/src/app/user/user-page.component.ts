@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { OAuthService } from 'angular-oauth2-oidc';
 import { merge, Observable, of } from 'rxjs';
 import { flatMap, map } from 'rxjs/operators';
-import { AuthService } from '../auth/auth.service';
 import { UserService } from './user.service';
 
 @Component({
@@ -14,7 +13,6 @@ export class UserPageComponent implements OnInit {
 
   constructor(
     private readonly oauthService: OAuthService,
-    private readonly authService: AuthService,
     private readonly userService: UserService
   ) {}
 
