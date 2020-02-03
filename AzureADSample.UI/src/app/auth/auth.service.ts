@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { JwksValidationHandler, OAuthService } from 'angular-oauth2-oidc';
-import { Observable, ReplaySubject } from 'rxjs';
+import { Observable, ReplaySubject, timer } from 'rxjs';
 import {
   distinctUntilChanged,
   filter,
@@ -83,30 +83,38 @@ export class AuthService {
       .pipe(
         filter(e => e.type === 'token_received'),
         first(),
-        flatMap(
-          e =>
-            this.httpClient.get(
-              'https://graph.microsoft.com/v1.0/me/photo/$value',
-              {
-                responseType: 'arraybuffer'
-              }
-            )
-          // TODO: convert image response to base64 and cache
-        ),
-        flatMap(r => {
-          this.oAuthService.scope = `openid profile email ${this.config.auth.apiScope}`;
-          // TODO: how to request new scope interactively?
-          return this.oAuthService.silentRefresh();
-        })
+        flatMap(() => this.onReceivedFirstToken())
       )
-      .subscribe(e => {
-        const returnUrl = this.oAuthService.state;
-        if (returnUrl) {
-          // TODO: how to remove this timeout?
-          setTimeout(() => this.router.navigateByUrl(returnUrl), 100);
-        }
-      });
+      .subscribe();
 
     return this.oAuthService.loadDiscoveryDocumentAndTryLogin();
+  }
+
+  private async onReceivedFirstToken() {
+    const returnUrl = this.oAuthService.state;
+    const scopes = this.oAuthService.getGrantedScopes() as string[];
+    this.oAuthService.scope = `openid profile email ${this.config.auth.apiScope}`;
+
+    if (scopes.includes('User.Read')) {
+      await this.httpClient
+        .get('https://graph.microsoft.com/v1.0/me/photo/$value', {
+          responseType: 'arraybuffer'
+        })
+        .toPromise();
+
+      // TODO: convert to base64 and cache
+    }
+
+    if (!scopes.includes(this.config.auth.apiScope)) {
+      this.oAuthService.initImplicitFlow(returnUrl);
+      return;
+    }
+
+    if (returnUrl) {
+      // TODO: how to remove this timeout?
+      await timer(100).toPromise();
+
+      this.router.navigateByUrl(returnUrl);
+    }
   }
 }
