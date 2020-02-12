@@ -8,8 +8,8 @@ import {
   distinctUntilChanged,
   filter,
   first,
-  flatMap,
-  map
+  map,
+  mergeMap
 } from 'rxjs/operators';
 import { Config } from '../config/config';
 
@@ -54,7 +54,8 @@ export class AuthService {
       redirectUri: `${origin}index.html`,
       silentRefreshRedirectUri: `${origin}silent-refresh.html`,
       strictDiscoveryDocumentValidation: false,
-      skipIssuerCheck: true
+      skipIssuerCheck: true,
+      showDebugInformation: true
     });
     this.oAuthService.tokenValidationHandler = new JwksValidationHandler();
 
@@ -63,6 +64,13 @@ export class AuthService {
     this.oAuthService.events
       .pipe(
         map(() => this.oAuthService.hasValidAccessToken()),
+        filter(
+          e =>
+            !e ||
+            (this.oAuthService.getGrantedScopes() as string[]).includes(
+              this.config.auth.apiScope
+            )
+        ),
         distinctUntilChanged()
       )
       .subscribe(authenticated => {
@@ -83,7 +91,7 @@ export class AuthService {
       .pipe(
         filter(e => e.type === 'token_received'),
         first(),
-        flatMap(() => this.onReceivedFirstToken())
+        mergeMap(() => this.onReceivedFirstToken())
       )
       .subscribe();
 

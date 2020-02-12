@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
+import { OAuthService } from 'angular-oauth2-oidc';
 import { Observable } from 'rxjs';
-import { flatMap, map } from 'rxjs/operators';
+import { distinctUntilChanged, map } from 'rxjs/operators';
 import { AuthService } from '../auth/auth.service';
-import { UserService } from '../user/user.service';
 
 @Component({
   selector: 'app-toolbar',
@@ -16,7 +16,7 @@ export class ToolbarComponent implements OnInit {
 
   constructor(
     readonly authService: AuthService,
-    private userService: UserService,
+    private oAuthService: OAuthService,
     iconRegistry: MatIconRegistry,
     sanitizer: DomSanitizer
   ) {
@@ -27,9 +27,9 @@ export class ToolbarComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.userNameChanged = this.authService.authenticated.pipe(
-      flatMap(() => this.userService.get()),
-      map(user => (user ? user.name : null))
+    this.userNameChanged = this.oAuthService.events.pipe(
+      map(() => (this.oAuthService.getIdentityClaims() as any).name),
+      distinctUntilChanged()
     );
   }
 }

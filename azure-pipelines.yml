@@ -27,7 +27,7 @@ stages:
         command: publish
         arguments: --configuration $(BuildConfiguration) -p:Version=$(Build.BuildNumber) --output $(build.artifactstagingdirectory)/api
         modifyOutputPath: false
-        workingDirectory: AzureADSample.Api
+        projects: AzureADSample.Api/*.csproj
 
     - publish: $(build.artifactstagingdirectory)/api
       artifact: api
@@ -63,7 +63,7 @@ stages:
         command: publish
         arguments: --configuration $(BuildConfiguration) -p:Version=$(Build.BuildNumber) --output $(build.artifactstagingdirectory)/functions
         modifyOutputPath: false
-        workingDirectory: AzureADSample.Functions
+        projects: AzureADSample.Functions/*.csproj
 
     - publish: $(build.artifactstagingdirectory)/functions
       artifact: functions

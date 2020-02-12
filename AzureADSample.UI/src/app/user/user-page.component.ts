@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { OAuthService } from 'angular-oauth2-oidc';
 import { merge, Observable, of } from 'rxjs';
-import { flatMap, map } from 'rxjs/operators';
+import { map, mergeMap } from 'rxjs/operators';
 import { UserService } from './user.service';
 
 @Component({
@@ -23,7 +23,7 @@ export class UserPageComponent implements OnInit {
     )
       .pipe(map(() => this.oauthService.hasValidAccessToken()))
       .pipe(
-        flatMap(authenticated =>
+        mergeMap(authenticated =>
           authenticated ? this.userService.get() : of(null)
         ),
         map(user => ({
